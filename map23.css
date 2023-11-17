@@ -1,0 +1,179 @@
+body {
+    background-image: url(https://raw.githubusercontent.com/aashishpanthi/hostque/main/images/space.jpg);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    image-rendering: auto;
+  }
+  
+  #map {
+    height: 400px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 25%;
+  }
+
+  /* Style the prompt inputs */
+  .prompt-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    margin-right: 15px;
+  }
+  
+  .prompt-input label {
+    margin-right: 10px;
+  }
+  
+  .prompt-input input {
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    background-color: white;
+    color: black;
+    transition: 0.2s ease-in;
+  }
+  .prompt-input input:hover{
+    background-color: rgb(185, 175, 175);
+  }
+  
+  /* Style the submit button */
+  .submit-btn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(101, 177, 202);
+    border-radius: 10%;
+    width: 150px;
+    height: 60px;
+  }
+  
+  /* Style the heading */
+  h1 {
+    font-size: 24px;
+  }
+  
+  /* Style the wrapper container for inputs */
+  .bottom-inputs {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .prompt-inputt{
+    padding: 4px;
+    border-radius: 3px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    margin-right: 15px;
+  }
+  
+  .prompt-inputt label{
+    margin-right: 10px;
+  }
+  
+  .prompt-inputt input{
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    background-color: white;
+    color: #000000;
+    transition: 0.2s ease-in-out;
+  }
+  .prompt-inputt input:hover{
+    background-color: rgb(173, 163, 163);
+  }
+  
+  .submit-btnn{
+    width: 140px;
+    height: 57px;
+    color: rgb(83, 189, 224);
+    font-size: 17px;
+    border-radius: 20%;
+    border: none;
+    position: relative;
+    background: rgb(23, 157, 202);
+    transition: 0.5s;
+  }
+  .submit-btnn:hover{
+    background-color: #fff;
+  }
+
+  .clear{
+    width: 110px;
+    height: 57px;
+    color: rgb(83, 189, 224);
+    font-size: 17px;
+    border-radius: 20%;
+    border: none;
+    position: relative;
+    background: rgb(23, 157, 202);
+    transition: 0.5s;
+    margin-right: 40px;
+  }
+  .clear:hover{
+    background-color: #fff;
+  }
+  .clearr{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(101, 177, 202);
+    border-radius: 10%;
+    width: 140px;
+    height: 60px;
+    margin-right: 40px;
+  }
+
+  @media screen and (max-width: 1690px) {
+   
+    #map{
+      height: 700px;
+    }
+   
+
+    .submit-btn {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgb(101, 177, 202);
+      border-radius: 10%;
+      width: 150px;
+      height: 60px;
+    }
+
+  }
+
+  @media screen and (max-height: 1100px) {
+   
+    #map{
+      height: 750px;
+    }
+   
+
+    .submit-btn {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgb(101, 177, 202);
+      border-radius: 10%;
+      width: 150px;
+      height: 60px;
+    }
+
+  }
+  

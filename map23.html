@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device, initial-scale=1.0">
+  <title>map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="map23.css">
+</head>
+<body>
+  <div id="map"></div>
+  <div class="bottom-inputs">
+    <div class="clear">
+       <button class="clearr" onclick="location.reload()">clear Markers</button>
+    </div>
+   
+
+    <div class="prompt-input">
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" onchange="onLongitudeLatitudeChange()" placeholder="Enter longitude">
+    </div>
+
+    <div class="prompt-input">
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" onchange="onLongitudeLatitudeChange()" placeholder="Enter latitude">
+    </div>
+    <div class="prompt-inputt">
+      <label for="address">Address:</label>
+      <input type="text" id="address" onchange="onAddressChange()" placeholder="Enter address">
+    </div>  
+    
+    <div class="submit-btnn">
+    <button class="submit-btn" onclick="addMarker()">Show on Map</button>
+  </div>
+    
+
+ 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+
+function onLongitudeLatitudeChange() {
+    const longitude = document.getElementById("longitude");
+    const latitude = document.getElementById("latitude");
+    const address = document.getElementById("address");
+
+    // Disable input when longitude and latitude values are entered
+    if (longitude.value !== "" && latitude.value !== "") {
+      address.disabled = true;
+    } else {
+      address.disabled = false;
+    }
+
+    // Reset address value when longitude and latitude values are entered
+    if (longitude.value !== "" || latitude.value !== "") {
+      address.value = "";
+    }
+  }
+
+  function onAddressChange() {
+    const longitude = document.getElementById("longitude");
+    const latitude = document.getElementById("latitude");
+    const address = document.getElementById("address");
+
+    // Disable longitude and latitude inputs when address value is entered
+    if (address.value !== "") {
+      longitude.disabled = true;
+      latitude.disabled = true;
+    } else {
+      longitude.disabled = false;
+      latitude.disabled = false;
+    }
+
+    // Reset longitude and latitude values when address value is entered
+    if (address.value !== "") {
+      longitude.value = "";
+      latitude.value = "";
+    }
+  }
+
+
+
+
+    var map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    function addMarker() {
+  var address = document.getElementById("address").value;
+  var latitude = parseFloat(document.getElementById("latitude").value);
+  var longitude = parseFloat(document.getElementById("longitude").value);
+
+  if (address) {
+    // Handle address input
+    var url = "https://nominatim.openstreetmap.org/search?format=json&q=" + address;
+
+    fetch(url)
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Unable to retrieve geolocation data for the address.");
+        }
+      })
+      .then(function (data) {
+        // Clear existing markers from the map
+        map.eachLayer(function (layer) {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+          }
+        });
+
+        if (data.length > 0) {
+          // Add markers for each returned location
+          data.forEach(function (result) {
+            var lat = result.lat;
+            var lon = result.lon;
+            L.marker([lat, lon]).addTo(map);
+          });
+        } else {
+          throw new Error("No results found for the address.");
+        }
+
+        // Zoom out to show all markers
+        var group = new L.featureGroup(map.getLayers());
+        map.fitBounds(group.getBounds().pad(0.5));
+      })
+      .catch(function (error) {
+        console.error(error);
+        document.getElementById("errorMessage").textContent = error.message;
+      });
+  } else if (!isNaN(latitude) && !isNaN(longitude)) {
+    // Handle latitude/longitude input
+    var marker = L.marker([latitude, longitude]);
+    marker.addTo(map);
+
+    // Calculate the bounds for all markers including the newly added marker
+    var groupBounds = map.getBounds().extend(marker.getLatLng());
+
+    // Fit the map to show all markers and set the zoom level
+    map.fitBounds(groupBounds);
+  }
+}
+
+
+      marker.bindPopup(address).openPopup();
+
+  </script>
+</body>
+</html>
